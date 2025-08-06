@@ -1,13 +1,18 @@
 #!/usr/bin/env bash
 
-# Exit on first error
-set -e
+# render.sh
 
-# Install frontend dependencies and build Vite
-cd frontend
+set -e  # Exit on any error
+
+# Build frontend
+echo "🏗️  Building frontend..."
+cd client
 npm install
 npm run build
+cd ..
 
-# Install backend dependencies
-cd ../backend
+# Start backend
+echo "🚀 Starting backend..."
+cd server
 npm install
+npm start
