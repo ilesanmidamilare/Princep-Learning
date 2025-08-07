@@ -17,7 +17,7 @@ const MONGO_URI = process.env.MONGO_URI;
 
 app.use(
   cors({
-    origin: process.env.CLIENT_URL,
+    origin: process.env.CLIENT_ORIGIN,
     methods: ["GET", "POST", "DELETE", "PUT"],
     allowedHeaders: ["Content-Type", "Authorization"],
   })
@@ -31,12 +31,6 @@ mongoose
   .then(() => console.log("mongodb is connected"))
   .catch((e) => console.log(e));
 
-
-  // Serve the built frontend
-app.use(express.static(path.join(__dirname, "../../client/dist")));
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../client/dist", "index.html"));
-});
 
 //routes configuration
 app.use("/auth", authRoutes);

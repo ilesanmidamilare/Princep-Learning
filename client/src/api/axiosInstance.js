@@ -1,7 +1,9 @@
 import axios from "axios";
+import { Import } from "lucide-react";
+const API_URL = Import.meta.env.VITE_API_URL;
 
 const axiosInstance = axios.create({
-  baseURL: "http://localhost:7000",
+  baseURL: API_URL,
 });
 
 axiosInstance.interceptors.request.use(

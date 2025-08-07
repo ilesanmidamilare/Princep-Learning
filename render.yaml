@@ -1,12 +1,30 @@
 services:
   - type: web
-    name: frontend
-    env: static
-    buildCommand: npm install && npm run build
-    staticPublishPath: dist
+    name: server
+    env: node
+    repo: https://github.com/ilesanmidamilare/Princep-Learning.git
+    branch: main
+    rootDir: server
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: PORT
+        value: 7000
+      - key: NODE_ENV
+        value: production
+      - key: CLIENT_ORIGIN
+        value: https://princep-frontend.onrender.com
+      - key: MONGO_URI
+        value: mongodb+srv://lms-user:YourPasswordHere@lmscluster.cyb0jeu.mongodb.net/
 
   - type: web
-    name: backend
-    env: node
-    buildCommand: cd backend && npm install
-    startCommand: cd backend && npm start
+    name: client
+    env: static
+    repo: https://github.com/ilesanmidamilare/Princep-Learning.git
+    branch: main
+    rootDir: client
+    buildCommand: npm install && npm run build
+    staticPublishPath: dist
+    envVars:
+      - key: VITE_API_URL
+        value: https://princep-backend.onrender.com
