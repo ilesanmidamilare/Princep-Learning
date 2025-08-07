@@ -15,11 +15,29 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 const MONGO_URI = process.env.MONGO_URI;
 
+// Configure CORS to allow multiple origins
+const allowedOrigins = [
+  process.env.CLIENT_ORIGIN,
+  "https://princep-client.onrender.com",
+  "http://localhost:5173",
+  "http://localhost:3000"
+].filter(Boolean); // Remove any undefined values
+
 app.use(
   cors({
-    origin: process.env.CLIENT_ORIGIN,
+    origin: function (origin, callback) {
+      // Allow requests with no origin (like mobile apps or curl requests)
+      if (!origin) return callback(null, true);
+
+      if (allowedOrigins.indexOf(origin) !== -1) {
+        callback(null, true);
+      } else {
+        callback(new Error('Not allowed by CORS'));
+      }
+    },
     methods: ["GET", "POST", "DELETE", "PUT"],
     allowedHeaders: ["Content-Type", "Authorization"],
+    credentials: true,
   })
 );
 
