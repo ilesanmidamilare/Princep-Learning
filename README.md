@@ -1,4 +1,4 @@
-# Princep 🎓
+# Princep
 
 **Princep** is a full-stack Learning Management System (LMS) that bridges the gap between instructors and students through seamless educational video sharing, payments, and structured learning experiences.
 
